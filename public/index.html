@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	
 	<meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
 	<meta charset="utf-8">
 
 	<title>Budget Calculator</title>
 
-	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="js/script.js" defer></script>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body>
-	<h1>Hello World</h1>
-	<p>This is now on Heroku</p>
-<!-- 	<div id="container">
+	<div id="container">
 
 		<div id="top">
 			<h1>Budget Calculator</h1>
@@ -24,13 +23,13 @@
 		</div>
 
 		<div id="mid">
-			<h2 id="sub_mid_final">+ 0.00</h2>
-			<h4 id="sub_mid_income">INCOME +0.00</h4>
-			<h4 id="sub_mid_expenses">EXPENSES -0.00</h4>
+			<h2 id="sub_mid_final">+ 0</h2>
+			<h4 id="sub_mid_income">Income +0</h4>
+			<h4 id="sub_mid_expenses">Expenses -0</h4>
 		</div>
 
 		<div id="bot">
-			<form action="./index.html">
+			<form id="form" method="POST" action="/budget-api">
 				<select id="type_of_budget" name="type_of_budget">
 					<option value="income">+</option>
 					<option value="expenses">-</option>
@@ -38,17 +37,22 @@
 
 				<input type="text" id="description" name="description" placeholder="Add a description" required>
 
-				<input type="number" id="amount" name="amount" placeholder="Amount" step="1" required>
+				<input type="number" id="amount" name="amount" placeholder="Amount" step="0.01" required>
 
-				<button onclick="addEntry()">Add Entry</button>
+				<button id="submit_button">Add Entry</button>
 			</form>
 		</div>
 
-		<div id="entries">
-			<div id="sub_entries_income">INCOME</div>
-			<div id="sub_entries_expenses">EXPENSES</div>
+		<div class="row" id="entries">
+			<br>
+			<div class="column" id="sub_entries_income">
+				<h1>INCOME</h1>
+			</div>
+			<div class="column" id="sub_entries_expenses">
+				<h1>EXPENSES</h1>
+			</div>
 		</div>
 
-	</div> -->
+	</div>
 </body>
 </html>
