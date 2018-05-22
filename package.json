@@ -1,0 +1,23 @@
+{
+  "name": "Budget-Calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidlu98/Budget-Calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidlu98/Budget-Calculator/issues"
+  },
+  "homepage": "https://github.com/davidlu98/Budget-Calculator#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
