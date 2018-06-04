@@ -1,53 +1,111 @@
-var date = new Date();
-
-var months = ['January', 'February', 'March', 'April', 'May', 'June',
-	'July', 'August', 'September', 'October', 'November', 'December'];
-
-var year = date.getFullYear();
-var month = months[date.getMonth()]; 
-
 $(document).ready(function(){
+	var upd_total = 0;
+	var upd_income = 0;
+	var upd_expenses = 0;
 
+	var date = new Date();
+
+	var months = ['January', 'February', 'March', 'April', 'May', 'June',
+		'July', 'August', 'September', 'October', 'November', 'December'];
+
+	var year = date.getFullYear();
+	var month = months[date.getMonth()]; 
 
 	$('#sub_top_month').text(`Available Budget in ${month} ${year}:`);
 
-	$.ajax({
-		method: 'get',
-		url: '/budget-api',
-		data: '',
-		success: printEntries
+	$('#form').submit(function(){
+		var type_of_budget = $('#type_of_budget').val();
+		var description = $('#description').val();
+		var amount = $('#amount').val();
+
+		if(type_of_budget === 'income'){
+			upd_total += Number(amount);
+			upd_income += Number(amount);
+
+			upd_total = Number(upd_total).toFixed(2);
+			upd_income = Number(upd_income).toFixed(2);		
+
+			if(upd_total < 0){
+				$('#sub_mid_final').text(`Budget -$${upd_total}`);
+			} else {
+				$('#sub_mid_final').text(`Budget +$${upd_total}`);
+			}
+
+			$('#sub_mid_income').text(`Income +$${upd_income}`);
+
+			$('#sub_entries_income').append(`<h4 class="income entry">${description} $${amount} <i class="remove fa fa-times-circle"></i> </h4>`);
+		} 
+
+		if(type_of_budget === 'expenses'){
+			upd_total -= Number(amount);
+			upd_expenses += Number(amount);
+
+			upd_total = Number(upd_total).toFixed(2);
+			upd_expenses = Number(upd_expenses).toFixed(2);
+
+			if(upd_total < 0){
+				$('#sub_mid_final').text(`Budget -$${upd_total}`);
+			} else {
+				$('#sub_mid_final').text(`Budget +$${upd_total}`);
+			}
+
+			$('#sub_mid_expenses').text(`Expenses -$${upd_expenses}`);
+
+			$('#sub_entries_expenses').append(`<h4 class="expense entry">${description} $${amount} <i class="remove fa fa-times-circle"></i> </h4>`);
+
+		}
+
+		return false;
 	});
+
+	$(document).on('click', '.remove', function(){
+		var text = $(this).parent()[0].innerText;
+		var text_length = text.length;
+		var index_of_dollar_sign = text.indexOf("$");
+		var amount = "";
+
+		for(var i = index_of_dollar_sign+1; i < text_length-1; i++){
+			amount += text[i];
+		}
+
+		if($(this).parent().hasClass('income')){
+			upd_total -= Number(amount);
+			upd_income -= Number(amount);
+
+			upd_total = Number(upd_total).toFixed(2);
+			upd_income = Number(upd_income).toFixed(2);		
+
+			if(upd_total < 0){
+				$('#sub_mid_final').text(`Budget -$${upd_total}`);
+			} else {
+				$('#sub_mid_final').text(`Budget +$${upd_total}`);
+			}
+
+			$('#sub_mid_income').text(`Income +$${upd_income}`);
+		}	
+
+		if($(this).parent().hasClass('expense')){
+			upd_total += Number(amount);
+			upd_expenses -= Number(amount);
+
+			upd_total = Number(upd_total).toFixed(2);
+			upd_expenses = Number(upd_expenses).toFixed(2);
+
+			if(upd_total < 0){
+				$('#sub_mid_final').text(`Budget -$${upd_total}`);
+			} else {
+				$('#sub_mid_final').text(`Budget +$${upd_total}`);
+			}
+
+			$('#sub_mid_expenses').text(`Expenses -$${upd_expenses}`);
+		}			
+
+		$(this).parent().remove();
+	})
 
 });
 
-			// <h2 id="sub_mid_final">+ 0.00</h2>
-			// <h4 id="sub_mid_income">Income +0.00</h4>
-			// <h4 id="sub_mid_expenses">Expenses -0.00</h4>
-
-function printEntries(data){
-	var inc = 0;
-	var exp = 0;
-	var total = 0.00;
-
-	$.each(data, function(){
-		if(this.type_of_budget === 'income'){
-			$('<h4>').html(`${this.description} $${this.amount}`).appendTo('#sub_entries_income');
-			inc = inc + Number(this.amount);
-		
-		} else {
-			$('<h4>').html(`${this.description} $${this.amount}`).appendTo('#sub_entries_expenses');
-			exp = exp + Number(this.amount);
-		}
-	});
-
-	total = Number(inc) - Number(exp);
-
-	if(total < 0){
-		$('#sub_mid_final').text(`- $${total}`);
-	} else {
-		$('#sub_mid_final').text(`+ $${total}`);
-	}
-
-	$('#sub_mid_income').text(`Income + $${inc}`);
-	$('#sub_mid_expenses').text(`Expenses - $${exp}`);
-}
+// Things to do: slice the negative sign when updating income or budget
+// And also there is a NaN problem
+// Maybe make a function to modularize it and repeat code repitition?
+// Change UI a bit?

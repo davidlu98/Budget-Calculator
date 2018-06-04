@@ -13,29 +13,30 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 	<div id="container">
-
 		<div id="top">
-			<h1>Budget Calculator</h1>
+			<!-- <h1>Budget Calculator</h1> -->
 			<h2 id="sub_top_month"></h2>
 		</div>
 
 		<div id="mid">
-			<h2 id="sub_mid_final">+ 0</h2>
-			<h4 id="sub_mid_income">Income +0</h4>
-			<h4 id="sub_mid_expenses">Expenses -0</h4>
+			<h2 id="sub_mid_final">Budget +$0</h2>
+			<h4 id="sub_mid_income">Income +$0</h4>
+			<h4 id="sub_mid_expenses">Expenses -$0</h4>
 		</div>
 
 		<div id="bot">
-			<form id="form" method="POST" action="/budget-api">
+			<form id="form">
 				<select id="type_of_budget" name="type_of_budget">
 					<option value="income">+</option>
 					<option value="expenses">-</option>
 				</select>
 
-				<input type="text" id="description" name="description" placeholder="Add a description" required>
+				<input type="text" id="description" name="description" placeholder="Add a description" maxlength="48" required>
 
 				<input type="number" id="amount" name="amount" placeholder="Amount" step="0.01" required>
 
