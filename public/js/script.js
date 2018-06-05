@@ -60,7 +60,7 @@ $(document).ready(function(){
 	 * Updates the views
 	*/
 	function update_views(type, description, amount, addition_or_removal){
-		amount = amont.toFixed(2);
+		amount = amount.toFixed(2);
 
 		if(displayed_total < 0){
 			var displayed_total_to_string = displayed_total.toString();
