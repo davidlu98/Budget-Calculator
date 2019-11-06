@@ -1,11 +1,9 @@
 # Budget Calculator
-This is a simple budget calculator written in HTML, CSS, JavaScript, jQuery, and Node.js so I can host it on Heroku.
-
-# Where To Find It
-You can use the budget calculator here:
-https://protected-sea-75652.herokuapp.com/
+This is a simple budget calculator written in HTML, CSS, JavaScript, jQuery, and Node.js, it is hosted on Heroku.
 
 # How To Use:
-To add an entry, add a description, enter the amount, and from the dropdown menu, select '+' for income or '-' for expense. Click 'Add Entry' to successfulyl add this entry to your budget calculator.
+To add an entry, a description and amount need to be added in the spaces given. There is a dropdown menu beside the description, "+" to indicate income or "-" for expense. Then click "Add Entry" to successfully add the entry to your budget calculator. Income will be displayed on the bottom left corner, and Expenses will be displayed on the bottom right corner. There is an 'x' beside each entry, pressing it will delete the entry.
 
-To remove an entry, click on the 'x' inside the box you wish to remove.
+# Link
+You can use the budget calculator here:
+https://protected-sea-75652.herokuapp.com/
